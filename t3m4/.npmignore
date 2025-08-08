@@ -1,9 +1,9 @@
-lib
-node_modules
+src
+typings
+tsconfig.json
 *.sublime-project
 *.sublime-workspace
 .vscode
 .idea
 *.iml
 .DS_Store
-dist/
