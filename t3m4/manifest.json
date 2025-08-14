@@ -1,21 +1,15 @@
 {
-    "manifest_version": 2,
-    "name": "T3-M4",
-    "version": "1.0",
-    "description": "Utility Droid",
-    "permissions": ["tabs", "activeTab"],
-    "browser_action": {
-      "default_popup": "popup.html",
-      "default_icon": "assets/t3m4.png"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-      }
-    ],
-    "icons": {
-      "64": "assets/t3m4.png"
-    }
+  "manifest_version": 2,
+  "name": "t3m4 Poker Data Capture",
+  "version": "0.1",
+  "description": "Captures live poker game data from Bodog.eu",
+  "permissions": ["tabs", "activeTab", "webRequest", "storage", "*://*.bodog.eu/*"],
+  "content_scripts": [{
+    "matches": ["*://*.bodog.eu/*"],
+    "js": ["content.js"]
+  }],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
   }
-  
+}
