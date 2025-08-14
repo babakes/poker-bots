@@ -1,20 +1,16 @@
-browser.runtime.onMessage.addListener((message) => {
-    if (message.action === 'grabDOM') {
-      const html = document.documentElement.outerHTML;
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-  
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'dom.html';
-      a.style.display = 'none';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-  
-      URL.revokeObjectURL(url);
-  
-      console.log('DOM snapshot saved');
-    }
-  });
-  
+// content.js
+function extractGameState() {
+    // placeholder: later we’ll parse the page to get cards, bets, etc.
+    return { example: "game state placeholder" };
+}
+
+const observer = new MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+        const gameData = extractGameState();
+        if (gameData) {
+            browser.runtime.sendMessage({ type: 'GAME_STATE', data: gameData });
+        }
+    });
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
