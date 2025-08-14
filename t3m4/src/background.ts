@@ -1,13 +1,11 @@
-browser.runtime.onInstalled.addListener(() => {
-    console.log("t3m4 is ready!");
-});
+interface Message {
+    type: string;
+    data: any;
+}
 
-browser.webRequest.onBeforeRequest.addListener(
-    (details) => {
-        if (details.method === "POST") {
-        console.log("Captured POST request:", details);
-        }
-    },
-    { urls: ["<all_urls>"] },
-    ["requestBody"]
-);
+browser.runtime.onMessage.addListener((message: Message) => {
+    if (message.type === 'GAME_STATE') {
+        console.log("Received game state:", message.data);
+        // sendToC3PO(message.data); // we’ll implement this next
+    }
+});
